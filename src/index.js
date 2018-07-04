@@ -1,7 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import ReactTable from 'react-table'
+
+//import './index.css';
+//import ReactTable from 'react-table'
 
 
 
@@ -33,8 +32,7 @@ class CreationOfButtons extends React.Component {
 			attributes:['seq', 'patient_id'],
 			operatorAndOr: ['And', 'Or'],
 			condition: ['=','like','!=','<=','>=','<','>'],
-			data: '[{"seq":"ATP6","patient_id":"8527"},{"seq":"ATP8","patient_id":"8366"}]',
-			jsonParsedData: JSON.parse('[{"seq":"ATP6","patient_id":"8527"},{"seq":"ATP8","patient_id":"8366"}]'),
+			data: '[{"seq":"ATP6","patient_id":"8527"},{"seq":"ATP8","patient_id":"8366"},{"seq":"ZTP12" , "patient_id":"2334"} , {"seq":"Bdfd","patient_id":"1000000"}]',
 			columns: [{
     Header: 'Sequence',
     accessor: 'seq' // String-based value accessors!
@@ -44,6 +42,8 @@ class CreationOfButtons extends React.Component {
     Cell: props => <span className='number'>{props.value}</span> // Custom cell components!
   }]
 		};
+
+ 
 		//this.baseState = this.state
 	}
 
@@ -70,7 +70,8 @@ class CreationOfButtons extends React.Component {
 
 	}
 	updateDiv(){
-		ReactDOM.render(<ReactTable data={this.state.jsonParsedData} columns={this.state.columns} defaultPageSize={2}/> , document.getElementById('updateTableId')) ;
+		let jsonParsedData = JSON.parse(this.state.data)
+		ReactDOM.render(<ReactTable data={jsonParsedData} columns={this.state.columns} defaultPageSize={5}/> , document.getElementById('updateTableId')) ;
 
 	}
 
@@ -92,7 +93,7 @@ class CreationOfButtons extends React.Component {
 		 filterDivChildren.removeChild(filterDivChildren.firstChild);
 	 }
 
-
+	ReactDOM.unmountComponentAtNode(document.getElementById("updateTableId"))
 
  }
 
